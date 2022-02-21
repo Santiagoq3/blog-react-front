@@ -1,0 +1,26 @@
+@import "../../scss/index.scss";
+
+
+.menutop{
+    display: flex;
+
+    button{
+        background-color: transparent;
+        color:$font-light;
+
+    }
+
+   &-left{
+       span{
+           width: 200;
+           font-size: 1rem;
+           color: #fff;
+           margin-left: 1em;
+       }
+   }
+
+   &-right{
+       position: absolute;
+       right: 0;
+   }
+}

@@ -1,16 +1,21 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
 import "./layoutadmin.scss"
+import { MenuTop } from '../components/admin/MenuTop';
+import { Sidebar } from '../components/admin/Sidebar';
 export const LayoutAdmin = () => {
 
     const {Header,Content,Footer,Sider} = Layout
+
+
+    const [menuIsOpen, setmenuIsOpen] = useState(true)
   return (
     <Layout>
-        {/* sider */}
-        <Layout className='layout-admin'>
+        <Sidebar menuCollapsed={menuIsOpen} />
+        <Layout className='layout-admin' style={{marginLeft: menuIsOpen  ? "80px" : "200px"}}>
             <Header className='layout-admin__header'>
-                {/* to do */}
+                <MenuTop setmenuIsOpen={setmenuIsOpen} menuIsOpen={menuIsOpen}/>
             </Header>
             <Content className='layout-admin__content'>
                 <Outlet />
