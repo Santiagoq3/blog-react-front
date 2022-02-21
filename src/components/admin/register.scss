@@ -1,0 +1,26 @@
+@import "../../scss/index.scss";
+
+.register-form{
+    text-align: left;
+
+
+    .ant-form-item{
+
+    }
+
+
+   input{
+       padding: 0.5em !important;
+
+       &:focus{
+           border-color: $primary-color;
+           box-shadow: none;
+       }
+   }
+
+   &__btn{
+       width: 100%;
+       font-size: 1rem;
+       height: 42px;
+   }
+}

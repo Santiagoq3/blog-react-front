@@ -40,6 +40,14 @@ export const routes = [
                 Component: Contact
             }
         ]
-    }
-    
+    },
+    {
+        path:"/login",
+        Component: SignIn,
+        routes: [
+            {
+                
+            }
+        ]
+    },
 ]

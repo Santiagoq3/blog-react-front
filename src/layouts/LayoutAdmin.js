@@ -1,15 +1,32 @@
-import React,{useState} from 'react'
+import React,{Fragment, useEffect, useState} from 'react'
 import { Layout } from 'antd';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import "./layoutadmin.scss"
 import { MenuTop } from '../components/admin/MenuTop';
 import { Sidebar } from '../components/admin/Sidebar';
+import { SignIn } from '../pages/admin/SignIn';
+
 export const LayoutAdmin = () => {
 
     const {Header,Content,Footer,Sider} = Layout
-
-
     const [menuIsOpen, setmenuIsOpen] = useState(true)
+
+    const navigate = useNavigate()
+
+    const user = null
+
+
+    useEffect(()=>{
+        
+        if(!user){
+                
+           navigate("/login")
+                
+        }
+    },[])
+    
+
+
   return (
     <Layout>
         <Sidebar menuCollapsed={menuIsOpen} />
