@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./register.scss"
 import { Form, Input, Button, Checkbox,notification } from 'antd';
 import {MailOutlined,LockOutlined} from '@ant-design/icons';
+import { signUpApi } from '../../api/config';
 
 
 export const Register = () => {
@@ -28,10 +29,27 @@ export const Register = () => {
         }
     }
 
-    const registerLog = (e)=>{
+    const registerLog = async(e)=>{
 
         e.preventDefault();
-        console.log(inputs);
+       const result = await signUpApi(inputs)
+       if(result.ok){
+           notification["success"]({
+               message: result.msg
+           })
+
+           setInputs({
+            email: "",
+            password: "",
+            repeatPassword: "",
+            privacy: false,
+    
+        })
+       }else{
+        notification["error"]({
+            message: result.msg
+        })
+       }
     }
 
   return (
@@ -56,7 +74,7 @@ export const Register = () => {
           
       </Form.Item>
       <Form.Item>
-          <Checkbox name='privacity' checked={inputs.privacy}>
+          <Checkbox name='privacy' checked={inputs.privacy}>
               He leido la politica de privacidad
           </Checkbox>
       </Form.Item>
