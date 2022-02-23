@@ -3,6 +3,7 @@ import "./signin.scss"
 
 import { Layout, Tabs } from 'antd';
 import { Register } from '../../components/admin/Register';
+import { Login } from '../../components/admin/Login';
 
 
 
@@ -20,7 +21,7 @@ export const SignIn = () => {
         <div className='sign-in__content-tabs'>
           <Tabs type='card'>
               <TabPane tab={<span>Entrar</span>} key="1">
-                Componente de LoginForm
+                <Login />
               </TabPane>
               <TabPane tab={<span>Nuevo Usuario</span>} key="2">
                 <Register />

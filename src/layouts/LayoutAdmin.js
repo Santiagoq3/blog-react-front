@@ -5,6 +5,7 @@ import "./layoutadmin.scss"
 import { MenuTop } from '../components/admin/MenuTop';
 import { Sidebar } from '../components/admin/Sidebar';
 import { SignIn } from '../pages/admin/SignIn';
+import { getAccessToken, getRefreshToken } from '../api/auth';
 
 export const LayoutAdmin = () => {
 
@@ -25,7 +26,8 @@ export const LayoutAdmin = () => {
         }
     },[])
     
-
+    console.log(getAccessToken())
+    console.log(getRefreshToken());
 
   return (
     <Layout>

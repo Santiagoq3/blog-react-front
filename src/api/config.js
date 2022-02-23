@@ -27,3 +27,22 @@ export const signUpApi = (data)=>{
 
 
 }
+
+
+export const signInApi = (data)=>{
+    const url =  `${path}/users/signin`;
+
+   const params ={
+        method: "POST",
+        body: JSON.stringify(data),
+        headers:{
+            "Content-Type": "application/json"
+        }
+    }
+
+   return fetch(url,params)
+    .then((res)=> res.json())
+    .then((data)=> data)
+    .catch((err)=> console.log(err))
+
+}
