@@ -6,6 +6,7 @@ import { MenuTop } from '../components/admin/MenuTop';
 import { Sidebar } from '../components/admin/Sidebar';
 import { SignIn } from '../pages/admin/SignIn';
 import { getAccessToken, getRefreshToken } from '../api/auth';
+import { useAuthHook } from '../hooks/useAuth';
 
 export const LayoutAdmin = () => {
 
@@ -14,35 +15,37 @@ export const LayoutAdmin = () => {
 
     const navigate = useNavigate()
 
-    const user = null
+    const {user,isLoading}= useAuthHook()
+    // const user = null
 
-
-    useEffect(()=>{
+    console.log(user,isLoading);
         
-        if(!user){
+    if(!user && !isLoading){
                 
-           navigate("/login")
+        navigate("/login")
                 
-        }
-    },[])
+    }
     
-    console.log(getAccessToken())
-    console.log(getRefreshToken());
+    
+    
 
-  return (
-    <Layout>
-        <Sidebar menuCollapsed={menuIsOpen} />
-        <Layout className='layout-admin' style={{marginLeft: menuIsOpen  ? "80px" : "200px"}}>
-            <Header className='layout-admin__header'>
-                <MenuTop setmenuIsOpen={setmenuIsOpen} menuIsOpen={menuIsOpen}/>
-            </Header>
-            <Content className='layout-admin__content'>
-                <Outlet />
-            </Content>
-            <Footer className='layout-admin__footer'>
-                este es mi footer admin
-            </Footer>
+    return (
+        <Layout>
+            <Sidebar menuCollapsed={menuIsOpen} />
+            <Layout className='layout-admin' style={{marginLeft: menuIsOpen  ? "80px" : "200px"}}>
+                <Header className='layout-admin__header'>
+                    <MenuTop setmenuIsOpen={setmenuIsOpen} menuIsOpen={menuIsOpen}/>
+                </Header>
+                <Content className='layout-admin__content'>
+                    <Outlet />
+                </Content>
+                <Footer className='layout-admin__footer'>
+                        este es mi footer admin
+                </Footer>
+                </Layout>
         </Layout>
-    </Layout>
-  )
+        )
+    
+
+  
 }

@@ -15,26 +15,29 @@ import { Home } from './pages/Home';
 import { Contact } from './pages/Contact';
 
 import { routes } from './config/routes';
-
+import { AuthProvider } from './providers/AuthProvider';
 
 function App() {
 
   return (
-    <BrowserRouter>
-     <Routes>
-       {
-         routes.map(ruta =>{
-           return <Route path={ruta.path} element={<ruta.Component />}>
-             {
-               ruta.routes.map(route=>{
-                 return <Route path={route.path} element={<route.Component />} />
-               })
-             }
-           </Route>
-         })
-       }
-     </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {
+            routes.map(ruta =>{
+              return <Route path={ruta.path} element={<ruta.Component />}>
+                {
+                  ruta.routes.map(route=>{
+                    return <Route path={route.path} element={<route.Component />} />
+                  })
+                }
+              </Route>
+            })
+          }
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+    
 
   );
 }

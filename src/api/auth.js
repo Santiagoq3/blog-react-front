@@ -43,3 +43,41 @@ const willExpireToken = (token)=>{
 
     return now > exp
 }
+
+export const logout = ()=>{
+    localStorage.removeItem(ACCESS_TOKEN)
+    localStorage.removeItem(REFRESH_TOKEN)
+}
+
+
+export const refreshAccessToken = (refreshToken)=>{
+    const url = `${path}/auth/refresh-token`;
+
+    const bodyObj = {
+        refreshToken
+    }
+
+    const params = {
+        method: "POST",
+        body: JSON.stringify(bodyObj),
+        headers:{
+            "Content-Type": "application/json"
+        }
+    };
+
+    fetch(url,params)
+    .then((res)=> res.json())
+    .then((data)=>{
+
+        if(data){
+            const {accessToken,refreshToken} = data;
+
+            localStorage.setItem(ACCESS_TOKEN,accessToken)
+            localStorage.setItem(REFRESH_TOKEN,refreshToken);
+            
+        }else{
+            logout();
+        }
+    })
+    .catch((err)=>console.log(err))
+}

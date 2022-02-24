@@ -1,7 +1,16 @@
 import React from 'react'
 import "./menutop.scss"
 import {Button,Icon} from "antd"
+import { logout } from '../../api/auth'
+
 export const MenuTop = ({menuIsOpen,setmenuIsOpen}) => {
+
+
+    const logoutUser = ()=>{
+        logout()
+        window.location.reload()
+    }
+
   return (
     <div className='menutop'>
         <div className='menutop-left'>
@@ -11,8 +20,8 @@ export const MenuTop = ({menuIsOpen,setmenuIsOpen}) => {
             </Button>
         </div>
         <div className='menutop-right'>
-            <Button type='link'>
-                Iniciar Sesion
+            <Button onClick={logoutUser} type='link'>
+                Cerrar Sesion
             </Button>
         </div>
     </div>

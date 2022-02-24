@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./login.scss"
 
 
@@ -7,10 +7,19 @@ import { Form,Input,Button,notification } from 'antd';
 import {UserOutlined,LockOutlined} from '@ant-design/icons';
 import { signInApi } from '../../api/config';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../helpers/constants';
+import { getAccessToken } from '../../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
 
+    const navigate = useNavigate()
+    
+    useEffect(()=>{
 
+        if(getAccessToken()){
+            navigate("/admin")
+        }
+    },[])
     const [inputs, setinputs] = useState({
         email: "",
         password: ""
