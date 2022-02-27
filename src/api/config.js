@@ -46,3 +46,40 @@ export const signInApi = (data)=>{
     .catch((err)=> console.log(err))
 
 }
+
+export const getUsersApi = (token)=>{
+
+    const url = `${path}/users/users`;
+
+
+    const params = {
+        headers:{
+            "Content-Type": "application/json",
+            xtoken: token
+        }
+    }
+
+   return fetch(url,params)
+    .then((res)=> res.json())
+    .then((data)=> data)
+    .catch((err)=> console.log(err))
+
+}
+export const getActiveUsersApi = (token,status)=>{
+
+    const url = `${path}/users/users-active?active=${status}`;
+
+
+    const params = {
+        headers:{
+            "Content-Type": "application/json",
+            xtoken: token
+        }
+    }
+
+   return fetch(url,params)
+    .then((res)=> res.json())
+    .then((data)=> data)
+    .catch((err)=> console.log(err))
+
+}

@@ -40,7 +40,7 @@ export const Login = () => {
 
        if(!result){
            notification["error"]({
-               message: result.msg
+               message: result
            })
        }else{
            const {refreshToken,token} = result

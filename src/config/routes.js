@@ -10,6 +10,7 @@ import { SignIn } from "../pages/admin/SignIn"
 //user pages
 import { Contact } from "../pages/Contact"
 import { Home } from "../pages/Home"
+import { User } from "../pages/user/User"
 
 
 export const routes = [
@@ -24,7 +25,12 @@ export const routes = [
             {
                 path:"login",
                 Component: SignIn
-            }
+            },
+            {
+                path:"users",
+                Component: User
+            },
+
         ]
     },
     {
