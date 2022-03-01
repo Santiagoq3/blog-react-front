@@ -13,7 +13,7 @@ export const Modal = (props) => {
         footer={false}
     >
         
-
+        {children}
     </ModalAntd>
   )
 }

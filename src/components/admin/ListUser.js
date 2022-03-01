@@ -4,7 +4,7 @@ import "./listuser.scss"
 import {Switch,List,Avatar,Button} from "antd"
 import { UserOutlined,EditOutlined,StopOutlined,DeleteOutlined,CheckOutlined } from '@ant-design/icons';
 import { Modal } from '../modal/Modal';
-
+import { EditUserForm } from './EditUserForm';
 
 export const ListUser = (props) => {
 
@@ -53,7 +53,7 @@ const UsersActive = ({usersActive,setIsVisibleModal,setModalTitle,setmModalConte
 
         setIsVisibleModal(true)
         setModalTitle(`${user.email} Editar` )
-        setmModalContent("Formulario para editar un usuario")
+        setmModalContent(<EditUserForm user={user} />)
 
     }
 
