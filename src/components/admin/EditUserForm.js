@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
 import "./edituserform.scss"
-import {Avatar,Form,Input,Select,Row,Col,Button} from "antd";
+import {Avatar,Form,Input,Select,Row,Col,Button,notification} from "antd";
 
 import {useDropzone} from "react-dropzone"
+import { updateUserApi } from '../../api/config';
+import { getAccessToken } from '../../api/auth';
+
 
 export const EditUserForm = ({user}) => {
 
@@ -20,10 +23,47 @@ export const EditUserForm = ({user}) => {
     useEffect(()=>{
         
     },[])
-    const updateUser = (e)=>{
+    const updateUser = async(e)=>{
 
         e.preventDefault()
+        const token = getAccessToken();
 
+        const userUpdate = userData;
+
+        if(userUpdate.password || userUpdate.repeatpassword){
+
+            if(userUpdate.password !== userUpdate.repeatpassword){
+                notification["error"]({
+                    message: "Las contraseña deben ser iguales"
+                })
+                return;
+            }else{
+                delete userUpdate.repeatpassword
+                console.log(userUpdate);
+            }
+        }
+
+        if(!userUpdate.name || !userUpdate.lastname || !userUpdate.email){
+            notification["error"]({
+                message: "El nombre, apellido y email son obligatorios"
+            })
+
+            return;
+        }
+
+        let result = await updateUserApi(token,userUpdate,user._id);
+
+        if(result.ok){
+            notification["success"]({
+                message:`${result.msg}`
+            })
+        }else{
+            notification["error"]({
+                message:`${result.msg}`
+            })
+        }
+
+        console.log(result);
         console.log(userData);
     }
 
