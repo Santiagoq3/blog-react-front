@@ -1,24 +1,22 @@
 import React, { useState } from 'react'
 import "./listuser.scss"
 
-import {Switch,List,Avatar,Button} from "antd"
+import {Switch,List,Avatar,Button,notification} from "antd"
 import { UserOutlined,EditOutlined,StopOutlined,DeleteOutlined,CheckOutlined } from '@ant-design/icons';
 import { Modal } from '../modal/Modal';
 import { EditUserForm } from './EditUserForm';
+import { activateUserApi } from '../../api/config';
+import { getAccessToken } from '../../api/auth';
 
 export const ListUser = (props) => {
 
     const {usersInactive,usersActive} = props
-
     const [viewUsersActive, setviewUsersActive] = useState(true);
-
     const [isVisibleModal, setIsVisibleModal] = useState(false);
-
     const [modalTitle, setModalTitle] = useState("");
-
     const [modalContent, setmModalContent] = useState("");
 
-    
+
   return (
 
 
@@ -57,6 +55,23 @@ const UsersActive = ({usersActive,setIsVisibleModal,setModalTitle,setmModalConte
 
     }
 
+    const desactivateUser = async(user)=>{
+
+        let token = getAccessToken()
+        const result = await activateUserApi(token,false,user._id);
+
+        if(result.ok){
+            notification["success"]({
+                message: result.msg
+            })
+        }else{
+            notification["error"]({
+                message: result.msg
+            })
+        }
+
+    }
+
     return (
        <List 
           className='users-active'  
@@ -72,7 +87,7 @@ const UsersActive = ({usersActive,setIsVisibleModal,setModalTitle,setmModalConte
                         <EditOutlined />
                     </Button>,
                     <Button type='warning'
-                        onClick={()=>console.log("Desactivar usuario")}
+                        onClick={()=> desactivateUser(user)}
                     >
 
                         <StopOutlined />

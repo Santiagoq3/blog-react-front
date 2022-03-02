@@ -107,3 +107,23 @@ export const updateUserApi = (token,user,userID)=>{
     
 
 }
+
+export const activateUserApi = (token,status,userID) =>{
+
+    const url = `${path}/users/users/activate-user/${userID}`;
+
+    const params = {
+        method: "PUT",
+        body: JSON.stringify({active: status}),
+        headers:{
+            "Content-Type": "application/json",
+            xtoken: token
+        }
+        
+    }
+
+    return fetch(url,params)
+    .then((res)=> res.json())
+    .then((data)=> data)
+    .catch((err)=> err)
+}
